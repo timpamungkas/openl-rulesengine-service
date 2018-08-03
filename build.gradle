@@ -1,0 +1,60 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	openlgen
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	
+	//compile('org.openl.core:org.openl:5.21.5')
+	compile('org.openl.rules:org.openl.rules:5.21.5')
+	compile('org.openl:org.openl.conf.ant:5.18.4')
+	
+	openlgen 'org.openl:org.openl.conf.ant:5.18.4' 
+	
+	
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+
+task generateBFIQCAInterface {
+	doLast {
+		ant.taskdef(name:"openlgen",
+					classname:"org.openl.conf.ant.JavaWrapperAntTask",
+					classpath: configurations.openlgen.asPath)
+		ant.echo('Generating wrapper classes...')
+		ant.openlgen(
+			openlName : 'org.openl.xls',
+			userHome : '.',
+			srcFile : 'src/main/resources/bfiqca/Model and Vocabulary.xlsx',
+		    targetClass : 'com.brms.openlrules.interfaces.IDatatype',
+			displayName : 'Rule datatypes',
+		    targetSrcDir : 'src/main/java/'
+		)
+	}
+}
