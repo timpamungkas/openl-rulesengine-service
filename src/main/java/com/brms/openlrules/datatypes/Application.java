@@ -2,7 +2,7 @@ package com.brms.openlrules.datatypes;
 
 public class Application {
 	public String id;
-	public Customer customer;
+	public Customer customer; 
 	public String branchId;
 	public String groupSchemeId;
 	public Integer insRateCategoryId;

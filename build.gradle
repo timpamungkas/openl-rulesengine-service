@@ -33,16 +33,14 @@ dependencies {
 	
 	//compile('org.openl.core:org.openl:5.21.5')
 	compile('org.openl.rules:org.openl.rules:5.21.5')
+	compile('org.openl.rules:org.openl.rules.project:5.21.5')
 	compile('org.openl:org.openl.conf.ant:5.18.4')
-	
 	openlgen 'org.openl:org.openl.conf.ant:5.18.4' 
-	
-	
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-
-task generateBFIQCAInterface {
+task generate {
 	doLast {
 		ant.taskdef(name:"openlgen",
 					classname:"org.openl.conf.ant.JavaWrapperAntTask",
@@ -51,10 +49,32 @@ task generateBFIQCAInterface {
 		ant.openlgen(
 			openlName : 'org.openl.xls',
 			userHome : '.',
-			srcFile : 'src/main/resources/bfiqca/Model and Vocabulary.xlsx',
-		    targetClass : 'com.brms.openlrules.interfaces.IDatatype',
-			displayName : 'Rule datatypes',
-		    targetSrcDir : 'src/main/java/'
+			srcFile : 'src/main/openl/bfiqca/Model and Vocabulary.xlsx',
+		    targetClass : 'Datatype',
+			displayName : 'Datatypes',
+		    targetSrcDir : 'src/main/java'
 		)
+	}
+}
+
+task generateQCAInterface {
+	doLast {
+		ant.project(name: "Generate Java Wrapper",default:"generate",basedir:"../"){
+			taskdef(name:"openlgen",
+					classname:"org.openl.conf.ant.JavaWrapperAntTask",
+					classpath: configurations.openlgen.asPath)
+			target(name:"generate"){
+				echo(message:"Generating wrapper classes...")
+				openlgen(
+					openlName : 'org.openl.xls',
+					userHome : '.',
+					srcFile : 'src/main/openl/bfiqca/Model and Vocabulary.xlsx',
+				    targetClass : 'Datatype.java',
+					displayName : 'Datatypes',
+				    targetSrcDir : ''
+		    	)
+				
+			}
+		}
 	}
 }

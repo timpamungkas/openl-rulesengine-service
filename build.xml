@@ -1,0 +1,12 @@
+<project name="GenJavaWrapper" default="generate" basedir="../">
+	<taskdef name="openlgen" classname="org.openl.conf.ant.JavaWrapperAntTask"/>
+	<target name="generate">
+		<echo message="Generating wrapper classes..." />
+		<openlgen openlName="org.openl.xls" 
+				  userHome="." 
+				  srcFile="src/main/openl/bfiqca/Model and Vocabulary.xls" 
+				  targetClass="com.brms.RulesWrapper" 
+				  displayName="Rule datatypes" targetSrcDir="gen">
+		</openlgen>
+	</target>
+</project>

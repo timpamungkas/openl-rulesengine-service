@@ -8,6 +8,7 @@ public class Financial {
 	public Integer tenor;
 	public Integer totalFunding;
 	public String tujuanPinjaman;
+	
 	public Financial(Integer angsuran, Integer jumlahTanggungan, Integer ltv, String repeatOrder, Integer tenor,
 			Integer totalFunding, String tujuanPinjaman) {
 		super();

@@ -1,0 +1,26 @@
+<project>
+	<name>BFI QCA</name>
+	<comment>OpenL Rules Repository to store BFI QCA Rules in the following modules </comment>
+	<modules>
+		<module>
+			<name>QCA Algorithm</name>
+			<type>API</type>
+			<rules-root path="QCA Algorithm.xlsx" />
+		</module>
+		<module>
+			<name>Scoring 2W_KLB</name>
+			<type>API</type>
+			<rules-root path="Scoring 2W_KLB.xlsx" />
+		</module>
+		<module>
+			<name>Scoring NCARSJMB</name>
+			<type>API</type>
+			<rules-root path="Scoring NCARSJMB.xlsx" />
+		</module>
+		<module>
+			<name>Model and Vocabulary</name>
+			<type>API</type>
+			<rules-root path="Model and Vocabulary.xlsx" />
+		</module>
+	</modules>
+</project>
