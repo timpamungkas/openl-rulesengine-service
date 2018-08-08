@@ -12,32 +12,40 @@ import org.openl.vm.IRuntimeEnv;
 
 import com.brms.openlrules.builders.ProjectBuilder;
 
-public class NCARSJMBService extends ProjectBuilder{
-	
+public class NCARSJMBService extends ProjectBuilder {
+
 	public Object NCARSJMBInstance;
 	public IRuntimeEnv env;
 	public IRulesRuntimeContext context;
 	public Class<?> dynamicClass;
-	
-	public NCARSJMBService() throws ProjectResolvingException, ClassNotFoundException, RulesInstantiationException{
+
+	public NCARSJMBService() throws ProjectResolvingException, ClassNotFoundException, RulesInstantiationException {
 		NCARSJMBInstance = projectEngineFactory.newInstance();
 		env = ((IEngineWrapper) NCARSJMBInstance).getRuntimeEnv();
-		context = RulesRuntimeContextFactory.buildRulesRuntimeContext(); 
+		context = RulesRuntimeContextFactory.buildRulesRuntimeContext();
 		env.setContext(context);
+		// TODO : Avoid hardcode. If need constant string, extract it to constant.
 		context.setLob("NCARSJMB");
 		dynamicClass = projectEngineFactory.getInterfaceClass();
 	}
-	
-	
-	public double UmurDebitur(Integer umurDebitur) throws ProjectResolvingException, ClassNotFoundException, RulesInstantiationException {
+
+	public double UmurDebitur(Integer umurDebitur)
+			throws ProjectResolvingException, ClassNotFoundException, RulesInstantiationException {
 		double score = 0;
-		try{
+		try {
+			// TODO : Avoid hardcode. If need constant string, extract it to constant.
 			Method method = this.dynamicClass.getMethod("UmurDebitur", Integer.class);
 			score = (double) method.invoke(NCARSJMBInstance, umurDebitur);
-			
-		}catch(NoSuchMethodException e){
-		}catch (InvocationTargetException e) {
-		}catch (IllegalAccessException e) {
+
+		} catch (NoSuchMethodException e) {
+			// TODO : don't eat exception. At minimum, log error (Google for logback +
+			// slf4j, or see my sample project)
+		} catch (InvocationTargetException e) {
+			// TODO : don't eat exception. At minimum, log error (Google for logback +
+			// slf4j, or see my sample project)
+		} catch (IllegalAccessException e) {
+			// TODO : don't eat exception. At minimum, log error (Google for logback +
+			// slf4j, or see my sample project)
 		}
 		return score;
 	}

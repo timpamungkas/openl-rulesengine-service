@@ -10,85 +10,97 @@ import com.brms.openlrules.builders.ProjectBuilder;
 import com.brms.openlrules.datatypes.Application;
 import com.brms.openlrules.datatypes.Customer;
 
-public class QCAAlgorithmService extends ProjectBuilder{
-	
+public class QCAAlgorithmService extends ProjectBuilder {
+
 	public Object QCAAlgorithmInstance;
 	public Class<?> dynamicClass;
-	
+
 	public QCAAlgorithmService() throws ProjectResolvingException, ClassNotFoundException, RulesInstantiationException {
 		QCAAlgorithmInstance = projectEngineFactory.newInstance();
 		dynamicClass = projectEngineFactory.getInterfaceClass();
 	}
-	
-	public double QCAAlgorithm(Application application) throws ProjectResolvingException, ClassNotFoundException, RulesInstantiationException {
+
+	public double QCAAlgorithm(Application application)
+			throws ProjectResolvingException, ClassNotFoundException, RulesInstantiationException {
 		double score = 0;
 
 		try {
-			Method method = dynamicClass.getMethod("QCAAlgorithm",Application.class);
+			// TODO : extract hardcode to constant
+			Method method = dynamicClass.getMethod("QCAAlgorithm", Application.class);
 			score = (double) method.invoke(QCAAlgorithmInstance, application);
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
+			// TODO : boilerplate codes. Single exception block is enough because exception
+			// handler all are same
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		}
 		return score;
 	}
-	
-	public double calculateScoreBySchemeId(String schemeId, Customer customer) throws ProjectResolvingException, ClassNotFoundException, RulesInstantiationException {
+
+	public double calculateScoreBySchemeId(String schemeId, Customer customer)
+			throws ProjectResolvingException, ClassNotFoundException, RulesInstantiationException {
 		double score = 0;
 		try {
-			Method method = dynamicClass.getMethod("calculateScoreBySchemeId",String.class,Customer.class);
-			score = (double) method.invoke(QCAAlgorithmInstance, schemeId,customer);
+			Method method = dynamicClass.getMethod("calculateScoreBySchemeId", String.class, Customer.class);
+			score = (double) method.invoke(QCAAlgorithmInstance, schemeId, customer);
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
+			// TODO : boilerplate codes. Single exception block is enough because exception
+			// handler all are same
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		}
 		return score;
 	}
-	
-	public String determineSchemeId(String branchId, String groupSchemeId, Integer insRateCategoryId, String assetCondition) 
+
+	public String determineSchemeId(String branchId, String groupSchemeId, Integer insRateCategoryId,
+			String assetCondition)
 			throws ProjectResolvingException, ClassNotFoundException, RulesInstantiationException {
 		String id = "";
 		try {
-			Method method = dynamicClass.getMethod("determineSchemeId",String.class,String.class,Integer.class,String.class);
-			id = (String) method.invoke(QCAAlgorithmInstance, branchId,groupSchemeId,insRateCategoryId,assetCondition);
+			Method method = dynamicClass.getMethod("determineSchemeId", String.class, String.class, Integer.class,
+					String.class);
+			id = (String) method.invoke(QCAAlgorithmInstance, branchId, groupSchemeId, insRateCategoryId,
+					assetCondition);
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
+			// TODO : boilerplate codes. Single exception block is enough because exception
+			// handler all are same
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
+			// TODO add log, not only stacktrace print
 			e.printStackTrace();
 		}
 		return id;
